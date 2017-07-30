@@ -14,6 +14,7 @@
 use App\Post;
 use App\User;
 use App\Role;
+use App\Country;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,6 +60,9 @@ Route::get('/delete' , function() {
     return $delete;
 
 });
+
+
+
 
 /*
  * ELOQUEN ORM
@@ -340,7 +344,18 @@ Route::get('user/pivot/{id}', function($id){
 
 
 
+// has meny through relation
+// kroz post nalazimo iz koje je drzave user
 
+Route::get('/user/country/{id}', function($id){
+
+    $country = Country::find($id);
+
+    foreach($country->posts as $post){
+
+        return $post->title;
+    }
+});
 
 
 
