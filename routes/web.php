@@ -345,15 +345,17 @@ Route::get('user/pivot/{id}', function($id){
 
 
 // has meny through relation
-// kroz post nalazimo iz koje je drzave user
+// vrace sve postove svih usera  koji su i neke drzave 'country_id'
 
 Route::get('/user/country/{id}', function($id){
 
     $country = Country::find($id);
 
+
+
     foreach($country->posts as $post){
 
-        return $post->title;
+        echo "naslov". $post->title."<br>";
     }
 });
 
