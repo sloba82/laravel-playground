@@ -15,6 +15,7 @@ use App\Post;
 use App\User;
 use App\Role;
 use App\Country;
+use App\Photo;
 
 Route::get('/', function () {
     return view('welcome');
@@ -351,13 +352,75 @@ Route::get('/user/country/{id}', function($id){
 
     $country = Country::find($id);
 
-
-
     foreach($country->posts as $post){
 
         echo "naslov". $post->title."<br>";
     }
 });
+
+
+// polimorfna relacije
+
+Route::get('user/photos/{id}', function($id) {
+
+    $user = User::find($id);
+
+
+
+    foreach($user->photos as $photo) {
+
+        echo $photo->path . "<br>";
+    }
+
+
+});
+
+
+Route::get('post/photos', function() {
+
+    $post =  Post::find(1);
+
+
+
+    foreach($post->photos as $photo) {
+
+        echo $photo->path . "<br>";
+    }
+
+
+});
+
+
+
+
+//--------------------------------------------
+
+
+//return image
+
+Route::get ('/image/{id}', function($id){
+
+    $img = Photo::find($id);
+
+    return $img->path;
+
+    //return Photo::find($id)->post->title;
+
+});
+
+
+//return image verijanta 2
+
+Route::get ('/imageVarijanta2/{id}', 'PhotoController@returnImgPath' );
+
+
+
+
+
+
+
+
+
 
 
 
