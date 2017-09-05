@@ -16,6 +16,7 @@ use App\User;
 use App\Role;
 use App\Country;
 use App\Photo;
+use App\Tag;
 
 Route::get('/', function () {
     return view('welcome');
@@ -415,11 +416,40 @@ Route::get ('/imageVarijanta2/{id}', 'PhotoController@returnImgPath' );
 
 
 
+//Polimorfna meny to meny relacija
 
 
 
 
+Route::get ('/post/tag/{id}', function ($id) {
 
+    $post = Post::find($id);
+
+    foreach($post->tags as $tag) {
+       echo $tag->name;
+    }
+
+});
+
+
+Route::get('/tag/post/{id}' , function($id){
+
+    $tag = Tag::find($id);
+
+    try {
+
+        foreach ($tag->posts as $post) {
+
+            echo $post->title . '<br>';
+        }
+
+    } catch (Exception $e) {
+        echo  '<h1>'. 'nesto je poslo pogresno'.'</h1>';
+    }
+
+});
+
+//Polimorfna meny to meny relacija END
 
 
 
