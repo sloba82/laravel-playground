@@ -451,6 +451,21 @@ Route::get('/tag/post/{id}' , function($id){
 
 //Polimorfna meny to meny relacija END
 
+//--------------------------------
+
+// polimorfic invertovana ralacija
+
+
+Route::get('/photo/post/{id}', function($id) {
+
+     $photo = Photo::findOrFail($id);
+     return $photo->imageable;
+
+});
+
+
+
+
 
 
 
